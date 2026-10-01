@@ -1,6 +1,6 @@
 ---
 title: "My First Report"
-author: "Your Name"
+author: "Emma Seto"
 format:
   html:
     embed-resources: true
@@ -41,3 +41,11 @@ hist(patients$age,
 
 When you are happy with the result, **commit and sync** your work (the Week 2
 course page walks you through this), then submit your repository link on Canvas.
+
+## My notes
+I learned how to navigate github and use quarto. I also learned how to commit and sync my work so that the changes are on github.
+
+```{r}
+# My first R calculation
+2 + 3
+```
