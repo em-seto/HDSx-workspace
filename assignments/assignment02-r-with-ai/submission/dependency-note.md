@@ -1,7 +1,8 @@
 # Dependency Note
 
 ## Packages used
-- tidyverse: used to import data, data manipulation, and summary-table creation
+
+- **tidyverse**: Used for data import, data manipulation, and summary-table creation.
 
 ## Environment
 

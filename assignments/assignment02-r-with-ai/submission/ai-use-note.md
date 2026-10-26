@@ -1,5 +1,5 @@
 # AI Use Note
 
-I used chatgpt to help me understand the concepts covered in class and the assignment. It explained the R code and suggested improvements to the data summary and custom function.
+I used ChatGPT to help me understand the concepts covered in class and the assignment. It explained R code and suggested improvements to the data summary and custom function.
 
-I reviewed the suggestions is made and checked the code, variable names, and output by rendering the Quarto document in GitHub codespaces. The AI-generated code was treated as a suggestion and checked before use.
+I reviewed the suggestions and checked the variable names and output by rendering the Quarto document in GitHub Codespaces. I treated AI-generated code as a suggestion and checked it before use.
