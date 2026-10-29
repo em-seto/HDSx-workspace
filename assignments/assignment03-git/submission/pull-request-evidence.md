@@ -7,7 +7,7 @@ https://github.com/em-seto/HDSx-workspace/pull/1
 docts/git-audit-note
 
 # Final commit hash
-the final commit hash will be added after all assignment files have been committed
+235392048552893c00d1c04f2611946f0bae4f3c
 
 # Explanation
 - I opened a pull request for my documentation-only changes
