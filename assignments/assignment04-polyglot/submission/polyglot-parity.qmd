@@ -1,0 +1,107 @@
+---
+title: "Assignment 4: Polyglot Parity"
+format: html
+---
+
+## 1. Load and Inspect the Data
+
+```{r}
+library(tidyverse)
+
+nhanes <- read_csv(
+  "examples/nhanes-equity/data/nhanes_equity_v6.csv",
+  show_col_types = FALSE
+)
+
+raw_row_count <- nrow(nhanes)
+raw_column_count <- ncol(nhanes)
+
+raw_row_count
+raw_column_count
+```
+
+## 2. Define a Reusable Summary Function
+
+```{r}
+summarise_bmi <- function(data) {
+  data |>
+    filter(
+      !is.na(BMI),
+      !is.na(IncomeGroup),
+      !is.na(Gender)
+    ) |>
+    group_by(IncomeGroup, Gender) |>
+    summarise(
+      n = n(),
+      mean_bmi = mean(BMI),
+      median_bmi = median(BMI),
+      sd_bmi = sd(BMI),
+      .groups = "drop"
+    ) |>
+    arrange(IncomeGroup, Gender)
+}
+```
+
+## 3. Calculate the Summary
+
+```{r}
+nhanes_filtered <- nhanes |>
+  filter(
+    !is.na(BMI),
+    !is.na(IncomeGroup),
+    !is.na(Gender)
+  )
+
+bmi_summary <- summarise_bmi(nhanes)
+
+filtered_row_count <- nrow(nhanes_filtered)
+number_of_groups <- nrow(bmi_summary)
+
+filtered_row_count
+number_of_groups
+
+bmi_summary
+```
+
+## 4. Rounded Summary Values
+
+```{r}
+bmi_summary |>
+  mutate(
+    mean_bmi = round(mean_bmi, 2),
+    median_bmi = round(median_bmi, 2),
+    sd_bmi = round(sd_bmi, 2)
+  )
+```
+
+## 5. R Exercise 1: BMI by Gender
+
+This exercise calculates the mean BMI for each gender after removing missing BMI values.
+
+```{r}
+nhanes |>
+  filter(!is.na(BMI), !is.na(Gender)) |>
+  group_by(Gender) |>
+  summarise(
+    n = n(),
+    mean_bmi = round(mean(BMI), 2),
+    .groups = "drop"
+  )
+```
+
+## 6. R Exercise 2: BMI by Income Group
+
+This exercise calculates the mean and median BMI for each income group after removing missing values.
+
+```{r}
+nhanes |>
+  filter(!is.na(BMI), !is.na(IncomeGroup)) |>
+  group_by(IncomeGroup) |>
+  summarise(
+    n = n(),
+    mean_bmi = round(mean(BMI), 2),
+    median_bmi = round(median(BMI), 2),
+    .groups = "drop"
+  ) |>
+  arrange(IncomeGroup)
+```
