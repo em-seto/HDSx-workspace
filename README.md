@@ -27,6 +27,8 @@ The cached NHANES files are committed course assets for offline classroom use.
 Treat them as read-only inputs. Do not replace them with private or identifiable
 health data.
 
+For assignment 3, keep your submission evidence and documentation-change notes in: assignments/assignment03-git/submission/
+
 ## Getting started (the full walkthrough is on the Week 2 course page)
 
 1. On this repository's GitHub page, click the green **`< > Code`** button →
