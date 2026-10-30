@@ -1,0 +1,57 @@
+---
+title: "Assignment 5: Visualization Audit"
+format: html
+---
+
+## Corrected Visualization
+
+This visualization examines mean BMI across NHANES cycles by income group.
+
+```{r}
+#| message: false
+#| warning: false
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+nhanes <- read_csv(
+  "examples/nhanes-equity/data/nhanes_equity_v6.csv",
+  show_col_types = FALSE
+)
+
+bmi_summary <- nhanes |>
+  filter(!is.na(BMI), !is.na(IncomeGroup), !is.na(Cycle)) |>
+  group_by(Cycle, IncomeGroup) |>
+  summarise(
+    mean_bmi = mean(BMI),
+    n = n(),
+    .groups = "drop"
+  )
+
+corrected_plot <- ggplot(
+  bmi_summary,
+  aes(x = Cycle, y = mean_bmi,
+      color = IncomeGroup, group = IncomeGroup)
+) +
+  geom_point(size = 3) +
+  geom_line(linewidth = 1) +
+  labs(
+    title = "Mean BMI by Income Group Across NHANES Cycles",
+    subtitle = "Descriptive comparison of BMI across income groups",
+    x = "NHANES cycle",
+    y = "Mean BMI (kg/m²)",
+    color = "Income group"
+  ) +
+  theme_minimal(base_size = 12)
+
+print(corrected_plot)
+
+ggsave(
+  "corrected-plot.png",
+  corrected_plot,
+  width = 8,
+  height = 5,
+  dpi = 300
+)
+```
