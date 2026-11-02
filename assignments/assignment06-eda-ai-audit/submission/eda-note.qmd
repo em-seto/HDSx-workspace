@@ -1,0 +1,120 @@
+---
+title: "Assignment 6: EDA and AI Audit"
+format: html
+---
+
+## Load Data
+
+```{r}
+#| label: load-data
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(knitr)
+
+# AI prompt: Help load the classroom NHANES CSV using a relative path.
+# Verified: Check that the file exists and the dataset loads.
+
+data_path <- "examples/nhanes-equity/data/nhanes_equity_v6.csv"
+
+if (!file.exists(data_path)) {
+  data_path <- "../../../examples/nhanes-equity/data/nhanes_equity_v6.csv"
+}
+
+stopifnot(file.exists(data_path))
+
+nhanes <- read_csv(data_path, show_col_types = FALSE)
+
+dim(nhanes)
+```
+
+## Analysis Cohort
+
+The analysis includes participants aged 20 to 80, inclusive.
+
+```{r}
+#| label: analysis-cohort
+
+# AI prompt: Filter participants aged 20-80 inclusive.
+# Verified: Check that both age boundaries are included.
+
+analysis_df <- nhanes |>
+  filter(!is.na(Age), Age >= 20, Age <= 80)
+
+cohort_flow <- tibble(
+  Stage = c("Original dataset", "Age 20-80"),
+  N = c(nrow(nhanes), nrow(analysis_df))
+)
+
+kable(cohort_flow)
+```
+
+## Missingness Analysis
+
+Before creating Table 1, missing values were examined for Age, BMI, and IncomeGroup.
+
+```{r}
+#| label: missingness
+
+# AI prompt: Summarize missing values in the analysis variables.
+# Verified: Compare missing counts with the cohort size.
+
+missingness <- analysis_df |>
+  summarise(
+    Age_missing = sum(is.na(Age)),
+    BMI_missing = sum(is.na(BMI)),
+    IncomeGroup_missing = sum(is.na(IncomeGroup))
+  )
+
+kable(missingness)
+```
+
+Missing values are reported rather than removing all incomplete rows. Participants with missing BMI will be excluded only from BMI calculations, and participants with missing IncomeGroup cannot be assigned to an income group.
+
+
+## Table 1: Descriptive Statistics by Income Group
+
+Table 1 summarizes BMI and age among participants aged 20-80, grouped by income category. Missing values are excluded only from the relevant calculations.
+
+```{r}
+#| label: table1
+
+# AI prompt: Create a descriptive Table 1 showing N,
+# mean BMI (SD), and mean Age (SD) by IncomeGroup.
+# Verified: Use sd() instead of var() and check missing values.
+
+table1 <- analysis_df |>
+  filter(!is.na(IncomeGroup)) |>
+  group_by(IncomeGroup) |>
+  summarise(
+    N = n(),
+    `BMI, mean (SD)` = sprintf(
+      "%.1f (%.1f)",
+      mean(BMI, na.rm = TRUE),
+      sd(BMI, na.rm = TRUE)
+    ),
+    `Age, mean (SD)` = sprintf(
+      "%.1f (%.1f)",
+      mean(Age, na.rm = TRUE),
+      sd(Age, na.rm = TRUE)
+    ),
+    .groups = "drop"
+  )
+
+kable(table1)
+
+write_csv(
+  table1,
+  "assignments/assignment06-eda-ai-audit/submission/table1.csv"
+)
+```
+
+## Interpretation
+
+This analysis describes differences in mean BMI and age across income groups among participants aged 20-80 in the classroom NHANES dataset.
+
+The results are descriptive and unweighted. No statistical significance tests were conducted, and the observed differences do not establish that income causes changes in BMI.
+
+Missing values were examined before summarizing the data. Participants with missing IncomeGroup were excluded from the grouped table, while missing BMI values were excluded only from BMI calculations. Therefore, the number of observations contributing to each statistic may differ.
+```
