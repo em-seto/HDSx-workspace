@@ -1,0 +1,63 @@
+
+---
+title: "Income and BMI: Understanding Differences Across Income Groups"
+subtitle: "Assignment 8 — Scientific Communication"
+format:
+  html:
+    embed-resources: true
+---
+
+## Audience
+
+The intended audience is individuals studying or working in public health who are interested in understanding socioeconomic differences in health and identifying areas that may require further investigation.
+
+**Knowledge translation purpose:** Communicate descriptive BMI patterns in an accessible way to support public health discussions without overstating the evidence.
+
+## Slide 1: Context — Why examine income and BMI?
+
+- Income is a socioeconomic factor that may be relevant to understanding differences in health.
+- Body mass index (BMI) is a measure based on a person's weight relative to their height.
+- Understanding BMI patterns across income groups can help public health planners identify questions for further investigation.
+
+**Health-data question:** How does average BMI differ across income groups among adults aged 20–80 in the classroom NHANES dataset?
+
+## Slide 2: Evidence — Average BMI across income groups
+
+| Income group | Average BMI (kg/m²) |
+|:-------------|--------------------:|
+| Low income | 29.4 |
+| Middle income | 29.3 |
+| High income | 28.6 |
+
+Table 1. Average BMI by income group among adults aged 20–80 in the classroom NHANES dataset.
+
+**Source:** Assignment 6, Table 1 (`assignments/assignment06-eda-ai-audit/submission/table1.csv`), derived from `nhanes_equity_v6.csv`.
+
+Participants with missing income information were excluded from the grouped table. Missing BMI values were excluded from the BMI calculations.
+
+## Slide 3: Takeaway — Average BMI was slightly higher in lower-income groups
+
+Adults in the low and middle income groups had slightly higher average BMI values than adults in the high income group.
+
+The difference between the low and high income groups was approximately 0.8 kg/m², based on the rounded group averages.
+
+These findings describe a pattern in the analysed sample rather than a causal relationship between income and BMI.
+
+## Slide 4: Limitation — What can these results tell us?
+
+- The analysis did not account for how survey participants were selected to represent the broader US population. Therefore, these findings describe the analysed sample and may not reflect patterns across the entire country.
+- Missing income and BMI information may affect the observed results.
+- No statistical significance tests were conducted.
+- Other factors, such as age, were not adjusted for in this comparison.
+
+The findings do not establish that lower income causes higher BMI.
+
+## Slide 5: Next Step — Use the findings to guide further investigation
+
+Individuals learning or working in public health can use these descriptive findings as a starting point for discussing socioeconomic differences in health.
+
+Before using the results to guide policy or resource allocation, further analysis should account for survey weights, missing data, and relevant demographic factors.
+
+**Recommended action:** Discuss whether a more detailed analysis of income-related BMI patterns would be useful for informing future public health planning.
+
+
